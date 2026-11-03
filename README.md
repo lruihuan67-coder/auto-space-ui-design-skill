@@ -41,3 +41,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "$dir\scripts\install.ps1" -
 ## 发布新版本
 
 替换 `auto-space-ui-design-skill.zip` 与 `skills/auto-space-ui-design/` 后提交推送，第二天的定时任务自动装上。
+
+## 引导器安装（推荐，含版本指针与校验）
+
+```powershell
+python bootstrap.py --workspace <工作区根目录>          # 安装 / 更新到最新 tag
+python bootstrap.py --workspace <工作区根目录> --verify  # 只校验
+```
+
+- 只从本仓库官方地址下载 `auto-space-ui-design-skill.zip`，按 `SHA256SUMS` 校验，不一致即停止
+- 安装到 `<工作区>/.spaceagents/plugins/auto-space-ui-design/`，版本目录由 `current.json` 指针指向，不写死
+- 旧版本保留在 `runtime/<旧版本>.old`，可回滚
